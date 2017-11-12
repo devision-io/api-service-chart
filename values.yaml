@@ -1,4 +1,4 @@
-app: app_name
+app: app-name
 replicaCount: 1
 image:
   repository: user/repo
