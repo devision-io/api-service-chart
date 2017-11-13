@@ -4,6 +4,9 @@ image:
   repository: user/repo
   tag: tag
   pullPolicy: Always
+  volume:
+    enabled: true
+    path: /tmp
   health_check:
     enabled: false
     path: /health

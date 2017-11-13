@@ -20,6 +20,11 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          {{- if .Values.image.volume.enabled }}
+          volumeMounts:
+          - mountPath: {{ .Values.image.volume.path }}
+            name: datadir
+          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             {{- range $var := .Values.image.env }}
@@ -46,3 +51,10 @@ spec:
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}
     {{- end }}
+      {{- if .Values.image.volume.enabled }}
+      volumes:
+      - name: datadir
+        hostPath:
+          # directory location on host
+          path: {{ .Values.image.volume.path }}
+      {{- end }}
