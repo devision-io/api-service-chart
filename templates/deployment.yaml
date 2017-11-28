@@ -35,12 +35,20 @@ spec:
             - containerPort: {{ .Values.service.internalPort }}
           {{- if .Values.image.health_check.enabled }}
           livenessProbe:
+            initialDelaySeconds: 15
+            periodSeconds: 60
+            timeoutSeconds: 60
+            failureThreshold: 15
             httpGet:
               path: {{ .Values.image.health_check.path}}
               port: {{ .Values.service.internalPort }}
           {{- end }}
           {{- if .Values.image.readness_check.enabled }}
           readinessProbe:
+            initialDelaySeconds: 15
+            periodSeconds: 60
+            timeoutSeconds: 60
+            failureThreshold: 15
             httpGet:
               path: {{ .Values.image.readness_check.path}}
               port: {{ .Values.service.internalPort }}
