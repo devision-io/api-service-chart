@@ -19,7 +19,7 @@ image:
   - key: SOME_KEY
     value: 1
 
-enable_prometheus_metrics: false
+prometheus_metrics: false
 
 service:
   type: ClusterIP
