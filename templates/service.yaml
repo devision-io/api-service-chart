@@ -19,7 +19,7 @@ spec:
       name: {{ .Values.app }}
     {{- if .Values.prometheus_metrics -}}
     - port: {{ .Values.service.metricsPort }}
-      targetPort: {{ .Values.service.internalPort }}
+      targetPort: {{ .Values.service.metricsPort }}
       protocol: TCP
       name: metrics
     {{- end -}}
