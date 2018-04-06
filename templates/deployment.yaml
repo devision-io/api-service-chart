@@ -33,6 +33,10 @@ spec:
             {{- end }}  
           ports:
             - containerPort: {{ .Values.service.internalPort }}
+            {{- if .Values.prometheus_metrics }}
+            - containerPort: {{ .Values.service.metricsPort }}
+              name: "metrics"
+          {{- end }}
           {{- if .Values.image.health_check.enabled }}
           livenessProbe:
             initialDelaySeconds: 15
