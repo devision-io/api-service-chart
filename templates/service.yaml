@@ -17,6 +17,12 @@ spec:
       targetPort: {{ .Values.service.internalPort }}
       protocol: TCP
       name: {{ .Values.app }}
+    {{- if .Values.prometheus_metrics -}}
+    - port: {{ .Values.service.metricsPort }}
+      targetPort: {{ .Values.service.internalPort }}
+      protocol: TCP
+      name: metrics
+    {{- end -}}
   selector:
     app: {{ template "name" . }}
     release: {{ .Release.Name }}

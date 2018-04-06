@@ -1,0 +1,21 @@
+{{- if .Values.prometheus_metrics -}}
+{{- $serviceName := include "fullname" . -}}
+{{- $servicePort := .Values.service.externalPort -}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    k8s-app: {{ template "name" . }}
+spec:
+  jobLabel: {{ template "name" . }}
+  endpoints:
+  - port: metrics
+    interval: 30s
+  selector:
+    matchLabels:
+      app: {{ template "name" . }}
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+{{- end -}}

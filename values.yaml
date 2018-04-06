@@ -19,12 +19,16 @@ image:
   - key: SOME_KEY
     value: 1
 
+enable_prometheus_metrics: false
+
 service:
   type: ClusterIP
   # Порт через который будет доступен контейнер 
   externalPort: 80
   # Порт который слушает приложение в контейнере
   internalPort: 80
+  # Порт который будет использоватся для сбора метрик
+  metricsPort: 8443
 ingress:
   enabled: true
   # Used to create an Ingress record.
