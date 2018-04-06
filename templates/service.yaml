@@ -7,9 +7,9 @@ metadata:
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-    {{- if .Values.auto_ingress }}
-    auto-ingress: 'true'
-    {{- end }}
+    {{- if .Values.prometheus_metrics }}
+    monitoring: prometheus
+    {{- end}}
 spec:
   type: {{ .Values.service.type }}
   ports:
