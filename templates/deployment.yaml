@@ -23,24 +23,6 @@ spec:
       - ip: "108.177.112.139"
         hostnames:
         - "adwords.google.com"
-      - ip: "64.233.161.106"
-        hostnames:
-        - "www.googleapis.com"
-      - ip: "64.233.161.147"
-        hostnames:
-        - "www.googleapis.com"
-      - ip: "64.233.161.99"
-        hostnames:
-        - "www.googleapis.com"
-      - ip: "64.233.161.103"
-        hostnames:
-        - "www.googleapis.com"
-      - ip: "64.233.161.104"
-        hostnames:
-        - "www.googleapis.com"
-      - ip: "64.233.161.105"
-        hostnames:
-        - "www.googleapis.com"
       imagePullSecrets:
         - name: registry-secret
       containers:
