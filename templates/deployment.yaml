@@ -15,14 +15,6 @@ spec:
         app: {{ template "name" . }}
         release: {{ .Release.Name }}
     spec:
-      hostAliases:
-      - ip: "64.233.165.138"
-        hostnames:
-        - "google.com"
-        - "www.google.com"
-      - ip: "108.177.112.139"
-        hostnames:
-        - "adwords.google.com"
       imagePullSecrets:
         - name: registry-secret
       containers:
