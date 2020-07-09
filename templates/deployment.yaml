@@ -20,10 +20,17 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          {{- if .Values.image.volume.enabled }}
+          {{- if or .Values.image.volume.enabled .Values.secrets.blockEnabled }}
           volumeMounts:
+          {{- if .Values.image.volume.enabled }}
           - mountPath: {{ .Values.image.volume.path }}
             name: datadir
+          {{- end }}
+          {{- if .Values.secrets.blockEnabled }}
+          - name: pronto-secret
+            mountPath: "{{ .Values.secrets.path_in_container }}"
+            readOnly: true
+          {{- end }}
           {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
@@ -63,10 +70,17 @@ spec:
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}
     {{- end }}
-      {{- if .Values.image.volume.enabled }}
+      {{- if or .Values.image.volume.enabled .Values.secrets.blockEnabled }}
       volumes:
+      {{- if .Values.image.volume.enabled }}
       - name: datadir
         hostPath:
           # directory location on host
           path: {{ .Values.image.volume.path }}
+      {{- end }}
+      {{- if .Values.secrets.blockEnabled }}
+      - name: pronto-secret
+        secret:
+          secretName: pronto-{{ .Values.app }}-prod
+      {{- end }}
       {{- end }}

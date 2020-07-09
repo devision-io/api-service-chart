@@ -7,6 +7,8 @@ image:
   volume:
     enabled: true
     path: /tmp
+  secrets:
+    blockEnabled: false
   health_check:
     enabled: false
     path: /health
