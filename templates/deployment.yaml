@@ -81,6 +81,6 @@ spec:
       {{- if .Values.secrets.blockEnabled }}
       - name: pronto-secret
         secret:
-          secretName: pronto-{{ .Values.app }}-prod
+          secretName: pronto-{{ .Values.pronto_secret_name }}
       {{- end }}
       {{- end }}
